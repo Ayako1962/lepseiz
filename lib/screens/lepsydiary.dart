@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Booksession extends StatelessWidget {
-  const Booksession({super.key});
+class Lepsydiary extends StatelessWidget {
+  const Lepsydiary({super.key});
 
   @override
   Widget build(BuildContext context) {

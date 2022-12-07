@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "617332712958",
+    "project_id": "lepsyhub",
+    "storage_bucket": "lepsyhub.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:617332712958:android:c2159afa695e14ccec8caf",
+        "android_client_info": {
+          "package_name": "com.example.lepseiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "617332712958-cobtfevor4153f4jln969c4dkj5qu82q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZBpCAHAeM0l4Dz33fzia4vPhrVe4KlLY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "617332712958-cobtfevor4153f4jln969c4dkj5qu82q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
