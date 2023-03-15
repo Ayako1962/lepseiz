@@ -11,9 +11,8 @@ import 'package:lepseiz/screens/signup.dart';
 import 'package:lepseiz/utils/utils.dart';
 
 class Login extends StatefulWidget {
-  
   const Login({super.key});
-    @override
+  @override
   State<Login> createState() => _LoginState();
 }
 
@@ -21,20 +20,16 @@ class _LoginState extends State<Login> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: AppBar(
         backgroundColor: Colors.teal,
         title: Center(
           child: Text(
             "lepsyHub",
             style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 30),
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 30),
           ),
         ),
       ),
@@ -43,9 +38,9 @@ class _LoginState extends State<Login> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-         children:[
-          ///IMAGE
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ///IMAGE
             Container(
               width: Get.width,
               height: Get.height * 0.4,
@@ -54,43 +49,45 @@ class _LoginState extends State<Login> {
                   image: AssetImage("images/loginbtn1.png"),
                   fit: BoxFit.fill,
                 ),
-              
               ),
             ),
             //EMAIL
-            
-           TextField(
-  decoration: InputDecoration(
-    prefixIcon: Icon(Icons.email),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10.0),
-         ),
-      filled: true,
-      hintStyle: TextStyle(color: Colors.grey[800], fontSize: 15, fontWeight: FontWeight.bold),
-      hintText: "Email",
-      fillColor: Colors.white70,
-      ),
-          controller: _emailController,
-),
 
-              //PASSWORD
-               TextField(
-  decoration: InputDecoration(
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      filled: true,
-      hintStyle: TextStyle(color: Colors.grey[800],fontSize: 15, fontWeight: FontWeight.bold),
-      hintText: "Password",
-      fillColor: Colors.white70),
-        controller: _passwordController,
-         obscureText: true,
-),
+            TextField(
+              decoration: InputDecoration(
+                prefixIcon: Icon(Icons.email),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                filled: true,
+                hintStyle: TextStyle(
+                    color: Colors.grey[800],
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold),
+                hintText: "Email",
+                fillColor: Colors.white70,
+              ),
+              controller: _emailController,
+            ),
 
-              
+            //PASSWORD
+            TextField(
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  filled: true,
+                  hintStyle: TextStyle(
+                      color: Colors.grey[800],
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold),
+                  hintText: "Password",
+                  fillColor: Colors.white70),
+              controller: _passwordController,
+              obscureText: true,
+            ),
 
-
-               ElevatedButton(
+            ElevatedButton(
               style: ElevatedButton.styleFrom(minimumSize: Size.fromHeight(50)),
               onPressed: () async {
                 if (_emailController.text.trim().isEmpty ||
@@ -109,24 +106,21 @@ class _LoginState extends State<Login> {
               height: 20,
             ),
             Text.rich(
-                // ignore: prefer_const_literals_to_create_immutables
+              // ignore: prefer_const_literals_to_create_immutables
+              TextSpan(text: 'Don\'t have an account? ', children: <InlineSpan>[
                 TextSpan(
-                    text: 'Don\'t have an account? ',
-                    children: <InlineSpan>[
-                  TextSpan(
-                      text: 'Sign Up',
-                      style: const TextStyle(color: Colors.teal,
-                          fontSize: 20, fontWeight: FontWeight.bold),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          Get.to(() => Signup());
-                        })
-            
-         ]
-            
-                ),
-      ),
-         ],
+                    text: 'Sign Up',
+                    style: const TextStyle(
+                        color: Colors.teal,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Get.to(() => Signup());
+                      })
+              ]),
+            ),
+          ],
         ),
       ),
     );

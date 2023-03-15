@@ -1,22 +1,22 @@
-
 import 'package:flutter/material.dart';
-import 'package:calendar_appbar/calendar_appbar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/instance_manager.dart';
-class Medicinereminder extends StatelessWidget {
-  const Medicinereminder({super.key});
+
+
+class buyMedicine extends StatelessWidget {
+  const buyMedicine({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-  appBar: CalendarAppBar(
-        onDateChanged: (value) => print(value),
-        firstDate: DateTime.now().subtract(Duration(days: 140)),
-        lastDate: DateTime.now(),
-          fullCalendar: false,
-          accent: Colors.teal,
-              padding: 10.0,
-               backButton: false,
+     appBar: AppBar(
+        backgroundColor: Colors.teal,
+        title: Center(
+          child: Text(
+            "my Cart",
+            style: TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 30),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -30,7 +30,7 @@ class Medicinereminder extends StatelessWidget {
                 Column(
                   children: [
                     IconButton(
-        icon: const FaIcon(FontAwesomeIcons.capsules,color: Colors.red),
+        icon: const FaIcon(FontAwesomeIcons.tablets,color: Colors.yellow),
         onPressed: () {}
 ),
                     SizedBox(
@@ -50,20 +50,17 @@ class Medicinereminder extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      "7.00p.m",
+                      "sh. 1450.00",
                       style: TextStyle(color: Colors.black, fontSize: 15),
                     ),
-                   Icon(
-                      Icons.alarm,
-                      color: Colors.grey,
-                    ), 
+
                   ],
                 ), //FIRST CHILD
                 Column(
                   children: [
                     Icon(
-                      Icons.notifications,
-                      color: Colors.grey,
+                      Icons.favorite,
+                      color: Colors.pink,
                     ),
                     SizedBox(
                       height: 10,
@@ -97,7 +94,8 @@ class Medicinereminder extends StatelessWidget {
           children: [
             IconButton(
               onPressed: () {},
-              icon: Icon(Icons.add, color: Colors.white,),
+              icon: Icon(Icons.payment_outlined, color: Colors.white,),
+              
             ),
           ],
         ),
@@ -105,3 +103,4 @@ class Medicinereminder extends StatelessWidget {
     );
   }
 }
+  

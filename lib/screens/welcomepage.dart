@@ -11,6 +11,12 @@ class Welcomepage extends StatelessWidget {
       
      
       body: Container(
+         decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("images/doc.png"),
+                  fit: BoxFit.fill,
+                ),
+              ),
         padding: EdgeInsets.all(20),
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
@@ -24,34 +30,25 @@ class Welcomepage extends StatelessWidget {
               "Welcome to lepsyHub",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontSize: 33,
+                  fontSize: 45,
                   fontWeight: FontWeight.bold,
-                  color: Colors.teal),
+                  color: Colors.black),
             ),
             SizedBox(
-              height: 10,
+              height: 70,
             ),
             Text(
               "We know how it feels to be epileptic",
               style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black),
+                  color: Colors.deepPurple),
             ),
           ],
         ),
 
             //THE IMAGE
-            Container(
-              width: Get.width,
-              height: Get.height * 0.4,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("images/welcome1.png"),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+           
             //BUTTON
             Container(
               width: Get.width,

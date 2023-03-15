@@ -46,6 +46,9 @@ dependencies:
   cloud_firestore: ^4.1.0
   font_awesome_flutter: ^10.2.1
   fl_chart: ^0.60.0
+  flutter_cupertino_date_picker_fork: ^1.0.7
+  
+
 
   
   

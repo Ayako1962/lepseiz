@@ -1,5 +1,6 @@
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:lepseiz/screens/profile.dart';
 
 class Settings extends StatelessWidget {
   const Settings({super.key});
@@ -13,28 +14,30 @@ class Settings extends StatelessWidget {
           child: Text(
             "Settings",
             style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 25),
+                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 25),
           ),
         ),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            ListTile(leading: CircleAvatar(
-              backgroundImage: AssetImage("images/profilebg.png"),
-              radius: 25,),
-              title: Text(" Edit Profile"),),
-            
-            ListTile(title: Text("Logout"),leading: Icon(Icons.logout),),
-             ListTile(title: Text("Change Password"),leading: Icon(Icons.password),),
-             ListTile(title: Text("Contact Us"),leading: Icon(Icons.call),),
-            
-
+            const SizedBox(height: 20,),
+            ListTile(
+              leading: CircleAvatar(
+                backgroundImage: AssetImage("images/profilebg.png"),
+                radius: 25,
+              ),
+              title: Text(" Edit Profile"),
+              onTap: () {
+                Get.to(()=>Profile());
+              },
+            ),
+            ListTile(
+              title: Text("Logout"),
+              leading: Icon(Icons.logout),
+            ),
           ],
         ),
-
       ),
     );
   }
