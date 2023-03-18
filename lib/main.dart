@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:lepseiz/controllers/main_bindings.dart';
 import 'package:lepseiz/firebase_options.dart';
 
@@ -12,7 +13,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+Intl.defaultLocale = 'en_US';
   runApp(const MyApp());
 }
 

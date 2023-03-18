@@ -21,9 +21,7 @@ class MainController extends GetxController {
     super.onReady();
     firestore = FirebaseFirestore.instance;
     //reactive list
-    triggers.bindStream(triggersStream());
-    medicineReminder.bindStream(medicineReminderStream());
-    seizureTrack.bindStream(seizureTrackStream());
+   
   }
 
   //creating triggers
@@ -83,9 +81,11 @@ class MainController extends GetxController {
     try {
       await firestore
           .collection('Triggers')
-          .set({"userId": userId, "triggerContent": triggerContent});
+          .doc(triggersSelectedId.value)
+          .update({ "triggerContent": triggerContent});
       Utils.showSuccess("success");
     } catch (e) {
+      print(e);
       Utils.showError('Failed to edit. try again');
     }
       Utils.dismissLoader();
@@ -96,7 +96,7 @@ class MainController extends GetxController {
     Utils.showLoading(message: "Editing medicine reminder");
     var userId = AuthController.to.firebaseUser.value?.uid;
     try {
-      await firestore.collection('MedicineReminder').set({
+      await firestore.collection('MedicineReminder').doc(medicineReminderSelectedId.value).update({
         "userId": userId,
         "reminderDate": reminderDate,
         "medicineName": medicineName,
@@ -113,7 +113,7 @@ class MainController extends GetxController {
     Utils.showLoading(message: "Editing seizure track");
     var userId = AuthController.to.firebaseUser.value?.uid;
     try {
-      await firestore.collection('SeizureTrack').set({
+      await firestore.collection('SeizureTrack').doc(seizureTrackSelectedId.value).update({
         "userId": userId,
         "month": month,
         "year": year,
@@ -171,61 +171,26 @@ class MainController extends GetxController {
     var data = <String, dynamic>{};
     return ref.map((list) {
       
-      list.docs.forEach((element) {
-        data[element.id] = element.data();
-      });
-      return data;
+    return {for (var element in list.docs) element.id:element.data()};
     });
   }
-  getTriggers() async {
-     var ref = await FirebaseFirestore.instance.collection('Triggers').where('userId', isEqualTo: AuthController.to.auth.currentUser.uid).orderBy('created').get();
-  var data = <String, dynamic>{};
-  ref.docs.forEach((element) {
-     data[element.id] = element.data();
-  });
-  triggers.value=data;
-  update();
-  }
+ 
 
   Stream<Map<String, dynamic>> medicineReminderStream() {
     var ref =
         FirebaseFirestore.instance.collection('MedicineReminder').where('userId', isEqualTo: AuthController.to.auth.currentUser.uid).orderBy('created').snapshots();
     return ref.map((list) {
-      var data = <String, dynamic>{};
-      list.docs.forEach((element) {
-        data[element.id] = element.data();
-      });
-      return data;
+     return {for (var element in list.docs) element.id:element.data()};
     });
   }
- getMedicineReminder() async {
-     var ref = await FirebaseFirestore.instance.collection('MedicineReminder').where('userId', isEqualTo: AuthController.to.auth.currentUser.uid).orderBy('created').get();
-  var data = <String, dynamic>{};
-  ref.docs.forEach((element) {
-     data[element.id] = element.data();
-  });
-  medicineReminder.value=data;
-  update();
-  }
+
   Stream<Map<String, dynamic>> seizureTrackStream() {
     var ref = FirebaseFirestore.instance.collection('SeizureTrack').where('userId', isEqualTo: AuthController.to.auth.currentUser.uid).orderBy('created').snapshots();
     return ref.map((list) {
-      var data = <String, dynamic>{};
-      list.docs.forEach((element) {
-        data[element.id] = element.data();
-      });
-      return data;
+      return {for (var element in list.docs) element.id:element.data()};
     });
   }
-   getSeizureTrack() async {
-     var ref = await FirebaseFirestore.instance.collection('SeizureTrack').where('userId', isEqualTo: AuthController.to.auth.currentUser.uid).orderBy('created').get();
-  var data = <String, dynamic>{};
-  ref.docs.forEach((element) {
-     data[element.id] = element.data();
-  });
-  seizureTrack.value=data;
-  update();
-  }
+  
 
   //Select Item Id
   selectTrigger(id) {

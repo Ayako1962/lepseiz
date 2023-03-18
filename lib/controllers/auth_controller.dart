@@ -5,6 +5,7 @@ import 'package:lepseiz/screens/login.dart';
 
 import '../screens/dashboard.dart';
 import '../utils/utils.dart';
+import 'main_controller.dart';
 
 class AuthController extends GetxController {
   static AuthController get to => Get.find();
@@ -45,6 +46,9 @@ class AuthController extends GetxController {
       update();
       Get.offAll(() => Dashboard());
       Utils.dismissLoader();
+       MainController.to.triggers.bindStream( MainController.to.triggersStream());
+     MainController.to.medicineReminder.bindStream( MainController.to.medicineReminderStream());
+     MainController.to.seizureTrack.bindStream( MainController.to.seizureTrackStream());
     }
   }
 

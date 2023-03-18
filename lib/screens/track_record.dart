@@ -1,9 +1,31 @@
+import 'dart:html';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
-class Trackrecord extends StatelessWidget {
+class Trackrecord extends StatefulWidget {
+  @override
+  State<Trackrecord> createState() => _TrackrecordState();
+}
+
+class _TrackrecordState extends State<Trackrecord> {
+  var months = [
+    "JAN",
+    "FEB",
+    "MAR",
+    "APR",
+    "MAY",
+    "JUN",
+    "JUL",
+    "AUG",
+    "SEP",
+    "OCT",
+    "NOV",
+    "DEC"
+  ];
+  var selectedmonth=0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +35,7 @@ class Trackrecord extends StatelessWidget {
       body: Container(
         height: Get.height,
         width: Get.width,
-        padding: EdgeInsets.only(left: 20, right: 20,top: 16,bottom: 100),
+        padding: EdgeInsets.only(left: 20, right: 20, top: 16, bottom: 100),
         child: LineChart(
           LineChartData(
             borderData: FlBorderData(
@@ -101,18 +123,46 @@ class Trackrecord extends StatelessWidget {
             // lineBarsData: lineChartBarData,
           ),
         ),
-        
       ),
-      
-       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showDialog(context: context, builder:  (context) {
-           return SimpleDialog(
-            title: Text('seizure count'),
-            children: [
-              
-                TextField(
-                  
+     floatingActionButton: FloatingActionButton(
+       onPressed: () {
+        showEditDialogue();
+       },
+       child: Icon(
+         Icons.add,
+         color: Colors.deepPurple,
+        ),
+     ),
+    );
+  }
+
+
+showEditDialogue() {
+  //_seizureTrackController.text = seizureTracktext;
+  showDialog(
+      context: context,
+      builder: (context) {
+        return SimpleDialog(
+          title: Text('seizure count'),
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+              child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,  
+                child: Row(children: months.map((e) => InkWell(
+                  onTap: () {
+                    setState(() {
+                      selectedmonth=months.indexOf(e);
+                    });
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(right: 10),
+                   padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                   color:   selectedmonth==months.indexOf(e)?Colors.black:Colors.teal, 
+                    child: Text(e,style: TextStyle(color: Colors.white,fontSize: 16),),),
+                )).toList(),)),
+            ),
+            TextField(
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.note_alt_outlined),
                 border: OutlineInputBorder(
@@ -126,23 +176,18 @@ class Trackrecord extends StatelessWidget {
                 hintText: "add an attack",
                 fillColor: Colors.white70,
               ),
-             // controller: _emailController,
+              // controller: _emailController,
             ),
-            SizedBox(height: 40,),
+            SizedBox(
+              height: 40,
+            ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(minimumSize: Size.fromHeight(50)),
-              onPressed: () async {
-               
-              },
+              onPressed: () async {},
               child: const Text("Add"),
             ),
-            ],
-
-           ) ;
-          });
-        },
-        child: Icon(Icons.add,color: Colors.deepPurple,),
-      ),
-    );
-  }
+          ],
+        );
+      });
+}
 }
