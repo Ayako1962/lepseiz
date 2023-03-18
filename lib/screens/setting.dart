@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lepseiz/controllers/auth_controller.dart';
 import 'package:lepseiz/screens/profile.dart';
 
 class Settings extends StatelessWidget {
@@ -33,6 +34,9 @@ class Settings extends StatelessWidget {
               },
             ),
             ListTile(
+              onTap: () async {
+                await AuthController.to.signOut();
+              },
               title: Text("Logout"),
               leading: Icon(Icons.logout),
             ),
