@@ -40,13 +40,13 @@ class MainController extends GetxController {
   }
 
   //Creating medicine reminders
-  createMedicineReminder(reminderDate, medicineName) async {
+  createMedicineReminder(reminderTime, medicineName) async {
     Utils.showLoading(message: "creating medicine reminder");
     var userId = AuthController.to.firebaseUser.value?.uid;
     try {
       await firestore.collection('MedicineReminder').add({
         "userId": userId,
-        "reminderDate": reminderDate,
+        "reminderTime": reminderTime,
         "medicineName": medicineName,'created':DateTime.now().millisecondsSinceEpoch
       });
       Utils.showSuccess("success");
@@ -92,13 +92,13 @@ class MainController extends GetxController {
   }
 
   //updating medicine reminders
-  updateMedicineReminder(reminderDate, medicineName) async {
+  updateMedicineReminder(reminderTime, medicineName) async {
     Utils.showLoading(message: "Editing medicine reminder");
     var userId = AuthController.to.firebaseUser.value?.uid;
     try {
       await firestore.collection('MedicineReminder').doc(medicineReminderSelectedId.value).update({
         "userId": userId,
-        "reminderDate": reminderDate,
+        "reminderTime": reminderTime,
         "medicineName": medicineName,
       });
       Utils.showSuccess("success");
