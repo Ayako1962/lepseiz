@@ -4,6 +4,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:lepseiz/controllers/main_controller.dart';
 
 class Trackrecord extends StatefulWidget {
   @override
@@ -11,6 +12,7 @@ class Trackrecord extends StatefulWidget {
 }
 
 class _TrackrecordState extends State<Trackrecord> {
+  var _seizureTrackController=TextEditingController();
   var months = [
     "JAN",
     "FEB",
@@ -26,6 +28,8 @@ class _TrackrecordState extends State<Trackrecord> {
     "DEC"
   ];
   var selectedmonth=0;
+  
+  int seizureTracktext=0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -138,55 +142,67 @@ class _TrackrecordState extends State<Trackrecord> {
 
 
 showEditDialogue() {
-  //_seizureTrackController.text = seizureTracktext;
+  _seizureTrackController.text = seizureTracktext.toString();
   showDialog(
       context: context,
       builder: (context) {
-        return SimpleDialog(
-          title: Text('seizure count'),
-          children: [
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-              child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,  
-                child: Row(children: months.map((e) => InkWell(
-                  onTap: () {
-                    setState(() {
-                      selectedmonth=months.indexOf(e);
-                    });
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(right: 10),
-                   padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                   color:   selectedmonth==months.indexOf(e)?Colors.black:Colors.teal, 
-                    child: Text(e,style: TextStyle(color: Colors.white,fontSize: 16),),),
-                )).toList(),)),
-            ),
-            TextField(
-              decoration: InputDecoration(
-                prefixIcon: Icon(Icons.note_alt_outlined),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
+        return StatefulBuilder(
+          builder: (context,setState) {
+            return SimpleDialog(
+              contentPadding: EdgeInsets.all(10),
+              title: Text('seizure count'),
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                  child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,  
+                    child: Row(children: months.map((e) => InkWell(
+                      onTap: () {
+                        setState(() {
+                          selectedmonth=months.indexOf(e);
+                        });
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(right: 10),
+                       padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                       color:   selectedmonth==months.indexOf(e)?Colors.black:Colors.teal, 
+                        child: Text(e,style: TextStyle(color: Colors.white,fontSize: 16),),),
+                    )).toList(),)),
                 ),
-                filled: true,
-                hintStyle: TextStyle(
-                    color: Colors.teal,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
-                hintText: "add an attack",
-                fillColor: Colors.white70,
-              ),
-              // controller: _emailController,
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(minimumSize: Size.fromHeight(50)),
-              onPressed: () async {},
-              child: const Text("Add"),
-            ),
-          ],
+                TextField(
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                  
+                    prefixIcon: Icon(Icons.note_alt_outlined),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    filled: true,
+                    hintStyle: TextStyle(
+                        color: Colors.teal,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                    hintText: "Add an attack",
+                    fillColor: Colors.white70,
+                  ),
+                   controller: _seizureTrackController,
+                ),
+                SizedBox(
+                  height: 40,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(minimumSize: Size.fromHeight(50)),
+                  onPressed: () async {
+                    if(_seizureTrackController.text.isNotEmpty){
+                      await MainController.to.createSeizureTrack(selectedmonth, DateTime.now().year, _seizureTrackController.text);
+                    }
+                  },
+
+                  child: const Text("Add"),
+                ),
+              ],
+            );
+          }
         );
       });
 }
