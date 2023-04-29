@@ -46,9 +46,9 @@ class AuthController extends GetxController {
       update();
       Get.offAll(() => Dashboard());
       Utils.dismissLoader();
-       MainController.to.triggers.bindStream( MainController.to.triggersStream());
-     MainController.to.medicineReminder.bindStream( MainController.to.medicineReminderStream());
-     MainController.to.seizureTrack.bindStream( MainController.to.seizureTrackStream());
+      MainController.to.triggers.bindStream(MainController.to.triggersStream());
+      MainController.to.medicineReminder
+          .bindStream(MainController.to.medicineReminderStream());
     }
   }
 
@@ -111,3 +111,4 @@ class AuthController extends GetxController {
     Utils.dismissLoader();
   }
 }
+
